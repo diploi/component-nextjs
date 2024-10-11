@@ -1,0 +1,31 @@
+diploiVersion: v1.0
+type: component
+name: Next.js
+description: Official Diploi component for Next.js
+
+contexts:
+  - name: app
+    identifier: app
+
+hosts:
+  - name: Next.js
+    identifier: nextjs
+    urlFormat: '[label].[default-domain]'
+
+images:
+  - identifier: app
+    repository: app
+    dockerfile: Dockerfile
+    image: ghcr.io/diploi/component-nextjs
+    stages:
+      - development
+      - production
+      - staging
+    manualBuildStages:
+      - development
+
+storage:
+  - identifier: app
+    stages:
+      - development
+    sizeMiB: 6144
