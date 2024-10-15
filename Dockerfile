@@ -33,6 +33,9 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
+# Create the public folder if it does not exist
+RUN mkdir -p ./public
+
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
@@ -45,7 +48,6 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
-RUN mkdir -p ./public
 
 # Set the correct permission for prerender cache
 RUN mkdir .next
