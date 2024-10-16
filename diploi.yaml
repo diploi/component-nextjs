@@ -47,3 +47,9 @@ environmentVariables:
     defaultValue: This text comes from an environment variable
     type: string
     contexts: label=app
+    
+logs:
+  - identifier: app-log
+    name: App Log
+    labelSelector: app=app
+    command: tail -n 2000 -F /var/log/app.log
