@@ -29,3 +29,21 @@ storage:
     stages:
       - development
     sizeMiB: 6144
+
+parameterGroups:
+  - name: SomeGroup
+    identifier: group
+    toggleable: false
+    description: Just some group
+    defaultValue: TRUE
+    parameters:
+      - name: String
+        identifier: TEST_STRING
+        defaultValue: test
+        type: string
+
+environmentVariables:
+  - identifier: SUBTITLE
+    defaultValue: This text comes from an environment variable
+    type: string
+    contexts: label=app
