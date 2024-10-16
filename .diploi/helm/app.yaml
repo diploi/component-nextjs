@@ -34,7 +34,7 @@ spec:
       #fix this by manualy kubectl apply -f [priorityclassesfile] in core code!
       containers:
         - name: app
-          image: {{ .Values.images.app }}
+          image: ghcr.io/diploi/component-nextjs:main
           imagePullPolicy: Always
           ports:
             - containerPort: 80
