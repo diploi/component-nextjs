@@ -37,7 +37,7 @@ spec:
           image: ghcr.io/diploi/component-nextjs:main
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 3000
           #startupProbe:
           #  exec:
           #    command:
