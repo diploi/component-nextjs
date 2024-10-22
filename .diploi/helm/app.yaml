@@ -39,7 +39,7 @@ spec:
           workingDir: /app/nextjs
           env:
           - name: NODE_ENV
-            value: development 
+            value: development
           securityContext:
             runAsUser: 0  # Ensure it runs as root
           volumeMounts:
