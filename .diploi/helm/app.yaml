@@ -116,15 +116,15 @@ spec:
             {{- if hasKey .Values.storage "app" }}
             - name: app-mount
               mountPath: /app
-            - name: root-mount
-              mountPath: /root
+            #- name: root-mount
+            #  mountPath: /root
             {{- end }}
       volumes:
         {{- if hasKey .Values.storage "app" }}
         - name: app-mount
           hostPath:
-            path: {{ .Values.storage.app.hostPath }}/app
-        - name: root-mount
-          hostPath:
-            path: {{ .Values.storage.app.hostPath }}/root
+            path: {{ .Values.storage.app.hostPath }}
+        #- name: root-mount
+        #  hostPath:
+        #    path: {{ .Values.storage.approot.hostPath }}
         {{- end }}
