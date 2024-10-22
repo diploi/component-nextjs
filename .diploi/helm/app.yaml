@@ -30,8 +30,18 @@ spec:
       terminationGracePeriodSeconds: 10
       imagePullSecrets:
         - name: diploi-pull-secret
-      #priorityClassName: {{ .Values.stage }} # disabled temporarily as old cores doesn't support this
-      #fix this by manualy kubectl apply -f [priorityclassesfile] in core code!
+      # TODO: This should only run once?
+      initContainers:
+        - name: install-dependencies
+          image: ghcr.io/diploi/component-nextjs:main
+          imagePullPolicy: Always
+          command: ['npm', 'install']
+          workingDir: /app/nextjs
+          securityContext:
+            runAsUser: 0  # Ensure it runs as root
+          volumeMounts:
+            - name: app-mount
+              mountPath: /app
       containers:
         - name: app
           image: ghcr.io/diploi/component-nextjs:main
@@ -39,39 +49,6 @@ spec:
           workingDir: /app/nextjs
           ports:
             - containerPort: 3000
-          #startupProbe:
-          #  exec:
-          #    command:
-          #    - cat
-          #    - /tmp/pod-ready
-          #  initialDelaySeconds: 30
-          #  periodSeconds: 5
-          #  timeoutSeconds: 1
-          #  successThreshold: 1
-          #  failureThreshold: 10
-          #  #terminationGracePeriodSeconds: 10 #inherited from pod level
-          #livenessProbe:
-          #  exec:
-          #    command:
-          #    - cat
-          #    - /tmp/pod-ready
-          #  initialDelaySeconds: 5
-          #  periodSeconds: 5
-          #  timeoutSeconds: 1
-          #  successThreshold: 1
-          #  failureThreshold: 2
-          #  #terminationGracePeriodSeconds: 10 #inherited from pod level
-          #readinessProbe:
-          #  exec:
-          #    command:
-          #    - cat
-          #    - /tmp/pod-ready
-          #  initialDelaySeconds: 20
-          #  periodSeconds: 5
-          #  timeoutSeconds: 1
-          #  successThreshold: 1
-          #  failureThreshold: 2
-          #  #terminationGracePeriodSeconds: 10 #inherited from pod level
           {{- if eq .Values.stage "development"}}
           resources:
             requests:
