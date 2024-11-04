@@ -24,8 +24,6 @@ images:
     manualBuildStages:
       - development
 
-storage:
-
 parameterGroups:
   - name: SomeGroup
     identifier: group
