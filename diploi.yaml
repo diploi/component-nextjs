@@ -25,10 +25,6 @@ images:
       - development
 
 storage:
-  - identifier: app
-    stages:
-      - development
-    sizeMiB: 6144
 
 parameterGroups:
   - name: SomeGroup
