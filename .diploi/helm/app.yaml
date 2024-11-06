@@ -90,15 +90,10 @@ spec:
             {{- if hasKey .Values.storage "code" }}
             - name: app-mount
               mountPath: /app
-            #- name: root-mount
-            #  mountPath: /root
             {{- end }}
       volumes:
         {{- if hasKey .Values.storage "code" }}
         - name: app-mount
           hostPath:
             path: {{ .Values.storage.code.hostPath }}
-        #- name: root-mount
-        #  hostPath:
-        #    path: {{ .Values.storage.approot.hostPath }}
         {{- end }}
