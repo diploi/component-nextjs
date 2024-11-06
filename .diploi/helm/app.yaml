@@ -82,12 +82,6 @@ spec:
             - name: {{ .identifier }}
               value: {{ .value | quote }}
             {{- end }}
-            - name: REPOSITORY_URL
-              value: {{ .Values.repositories.app.url }}
-            - name: REPOSITORY_BRANCH
-              value: {{ .Values.repositories.app.branch }}
-            - name: REPOSITORY_TAG
-              value: {{ .Values.repositories.app.tag }}
             - name: APP_PUBLIC_URL
               value: {{ .Values.hosts.app }}
             - name: STAGE
