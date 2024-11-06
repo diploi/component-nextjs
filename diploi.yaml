@@ -9,7 +9,7 @@ contexts:
 
 hosts:
   - name: Next.js
-    identifier: nextjs
+    identifier: app
     urlFormat: '[label].[default-domain]'
 
 images:
