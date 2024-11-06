@@ -87,7 +87,7 @@ spec:
             - name: STAGE
               value: {{ .Values.stage }}
           volumeMounts:
-            {{- if hasKey .Values.storage "app" }}
+            {{- if hasKey .Values.storage "code" }}
             - name: app-mount
               mountPath: /app
             #- name: root-mount
