@@ -43,7 +43,7 @@ environmentVariables:
     contexts: label=app
     
 logs:
-  - identifier: app-log
-    name: App Log
+  - name: app-log
+    type: log
     labelSelector: app=app
-    command: tail -n 2000 -F /var/log/app.log
+  
