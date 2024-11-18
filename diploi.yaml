@@ -43,7 +43,7 @@ environmentVariables:
     contexts: label=app
     
 logs:
-  - name: app-log
+  - name: App log
     type: log
     labelSelector: app=app
   
