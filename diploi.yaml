@@ -14,15 +14,7 @@ hosts:
 
 images:
   - identifier: app
-    repository: app
-    dockerfile: Dockerfile
-    image: ghcr.io/diploi/component-nextjs
-    stages:
-      - development
-      - production
-      - staging
-    manualBuildStages:
-      - development
+    prebuildImage: ghcr.io/diploi/component-nextjs
 
 parameterGroups:
   - name: SomeGroup
