@@ -43,11 +43,10 @@ RUN mkdir -p ./public
 # Production image, copy all the files and run next
 FROM base AS runner
 COPY . .
+WORKDIR ${FOLDER}
 
 # Clear the Next.js component folder as it will be populated by the build output.
-RUN rm -rf -- ${FOLDER}
-
-WORKDIR ${FOLDER}
+RUN rm -rf *
 
 # NOTE! We default to this now, production needs to be solved later
 ENV NODE_ENV=development
