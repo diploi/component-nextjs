@@ -45,9 +45,6 @@ FROM base AS runner
 COPY . .
 WORKDIR ${FOLDER}
 
-# Clear the Next.js component folder as it will be populated by the build output.
-RUN rm -rf *
-
 # NOTE! We default to this now, production needs to be solved later
 ENV NODE_ENV=development
 # Uncomment the following line in case you want to disable telemetry during runtime.
