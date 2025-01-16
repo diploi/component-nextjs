@@ -48,7 +48,6 @@ spec:
         - name: app
           image: ghcr.io/diploi/component-nextjs:main
           imagePullPolicy: Always
-          workingDir: /app/{{ .Values.identifier }}
           ports:
             - containerPort: 3000
           {{- if eq .Values.stage "development"}}
@@ -63,6 +62,9 @@ spec:
               memory: 500Mi
             limits:
               memory: 1000Mi
+          {{- end }}
+          {{- if eq .Values.stage "development" }}
+          workingDir: /app/{{ .Values.identifier }}
           {{- end }}
           env:
             {{ range $key, $val := .Values.parameterGroupsEnabled }}
