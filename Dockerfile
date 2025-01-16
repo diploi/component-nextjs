@@ -1,7 +1,7 @@
-FROM node:18-alpine AS base
-
 # This will be set by the GitHub action to the folder containing this component.
 ARG FOLDER=/app
+
+FROM node:18-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -36,9 +36,6 @@ RUN \
   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
   else echo "Lockfile not found." && exit 1; \
   fi
-
-# Create the public folder if it does not exist
-RUN mkdir -p ./public
 
 # Production image, copy all the files and run next
 FROM base AS runner
