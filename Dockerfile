@@ -42,39 +42,30 @@ RUN mkdir -p ./public
 
 # Production image, copy all the files and run next
 FROM base AS runner
-COPY . /app
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder --chown=nextjs:nodejs /app /app
 WORKDIR ${FOLDER}
 
 # NOTE! We default to this now, production needs to be solved later
 ENV NODE_ENV=development
+
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED=1
 
-# This would be good in production, but impractial in dev, since next wan't to touch node_modules itself
-#RUN addgroup --system --gid 1001 nodejs
-#RUN adduser --system --uid 1001 nextjs
-
-COPY --from=builder ${FOLDER}/public ./public
-
-# Set the correct permission for prerender cache
-#RUN mkdir .next
-#RUN chown nextjs:nodejs .next
-
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-#COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-#COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=builder ${FOLDER}/.next/standalone ./
-COPY --from=builder ${FOLDER}/.next/static ./.next/static
-
+COPY --from=builder --chown=nextjs:nodejs ${FOLDER}/.next/standalone ${FOLDER}
+COPY --from=builder --chown=nextjs:nodejs ${FOLDER}/.next/static ${FOLDER}/.next/static
 
 USER node
 
 EXPOSE 3000
-
 ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
 # server.js is created by next build from the standalone output
-# https://nextjs.org/docs/pages/api-reference/next-config-js/output
-ENV HOSTNAME="0.0.0.0"
-CMD ["npm", "run", "dev"]
+# https://nextjs.org/docs/pages/api-reference/config/next-config-js/output
+CMD ["node", "server.js"]
