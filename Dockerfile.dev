@@ -16,7 +16,10 @@ WORKDIR ${FOLDER}
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED=1
 
+USER 1000:1000
+
 EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
+
 CMD ["npm", "run", "dev"]

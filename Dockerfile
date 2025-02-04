@@ -40,10 +40,7 @@ RUN \
 # Production image, copy all the files and run next
 FROM base AS runner
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-COPY --from=builder --chown=nextjs:nodejs /app /app
+COPY --from=builder --chown=1000:1000 /app /app
 WORKDIR ${FOLDER}
 
 # NOTE! We default to this now, production needs to be solved later
@@ -54,10 +51,10 @@ ENV NODE_ENV=development
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs ${FOLDER}/.next/standalone ${FOLDER}
-COPY --from=builder --chown=nextjs:nodejs ${FOLDER}/.next/static ${FOLDER}/.next/static
+COPY --from=builder --chown=1000:1000 ${FOLDER}/.next/standalone ${FOLDER}
+COPY --from=builder --chown=1000:1000 ${FOLDER}/.next/static ${FOLDER}/.next/static
 
-USER node
+USER 1000:1000
 
 EXPOSE 3000
 ENV PORT=3000
