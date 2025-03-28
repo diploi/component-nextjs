@@ -3,10 +3,6 @@ type: component
 name: Next.js
 description: Official Diploi component for Next.js
 
-contexts:
-  - name: app
-    identifier: app
-
 hosts:
   - name: Next.js
     identifier: app
@@ -16,26 +12,7 @@ images:
   - identifier: app
     prebuildImage: ghcr.io/diploi/component-nextjs:[tag]
 
-parameterGroups:
-  - name: SomeGroup
-    identifier: group
-    toggleable: false
-    description: Just some group
-    defaultValue: TRUE
-    parameters:
-      - name: String
-        identifier: TEST_STRING
-        defaultValue: test
-        type: string
-
-environmentVariables:
-  - identifier: SUBTITLE
-    defaultValue: This text comes from an environment variable
-    type: string
-    contexts: label=app
-    
 logs:
-  - name: App log
+  - name: Next.js Log
     type: log
     labelSelector: app=app
-  
