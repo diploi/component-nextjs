@@ -2,9 +2,24 @@
 
 # Next.js Component for Diploi
 
+Launch a trial, no account needed
+https://diploi.com/component/next
+
 Uses the official [node](https://hub.docker.com/_/node) Docker image.
 
 ## Operation
+
+### Getting started
+
+1. In the Dashboard, click **Create Project +**
+2. Under **Pick Components**, choose **Next.js**
+
+   You can add other frameworks from this page if you want to create a monorepo application, eg, Next.js + Bun for backend.
+3. In **Pick Add-ons**, select any databases or extra tools you need.
+4. Choose **Create Repository** so Diploi generates a new GitHub repo for your project.
+5. Click **Launch Stack**
+
+Check the guide https://diploi.com/blog/hosting_nextjs_apps
 
 ### Development
 
