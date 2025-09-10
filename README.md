@@ -2,6 +2,10 @@
 
 # Next.js Component for Diploi
 
+[![launch with diploi badge](https://diploi.com/launch.svg)](https://diploi.com/component/next)
+[![component on diploi badge](https://diploi.com/component.svg)](https://diploi.com/component/next)
+[![latest tag badge](https://badgen.net/github/tag/diploi/component-nextjs)](https://diploi.com/component/next)
+
 Launch a trial, no account needed
 https://diploi.com/component/next
 
