@@ -35,4 +35,5 @@ Will build a production ready image. Image runs `npm install` & `npm build` when
 
 ## Links
 
+- [Adding Next.js to a project](https://docs.diploi.com/building/components/nextjs)
 - [Next.js documentation](https://nextjs.org/docs)
