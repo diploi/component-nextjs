@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 
 # This will be set by the GitHub action to the folder containing this component.
 ARG FOLDER=/app
