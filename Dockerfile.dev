@@ -10,9 +10,8 @@ RUN corepack enable
 # Setup PNPM
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN mkdir -p /pnpm-store \
- && pnpm config set node-linker hoisted --global \
- && pnpm config set store-dir /pnpm-store --global
+RUN mkdir -p /home/codespace/.pnpm-store /pnpm \
+ && chown -R 1000:1000 /home/codespace/.pnpm-store /pnpm
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -28,6 +27,10 @@ WORKDIR ${FOLDER}
 # ENV NEXT_TELEMETRY_DISABLED=1
 
 USER 1000:1000
+
+# Apply PNPM settings to be consistent with devcontainer
+RUN pnpm config set node-linker hoisted --global \
+ && pnpm config set store-dir /home/codespace/.pnpm-store --global
 
 EXPOSE 3000
 ENV PORT=3000
