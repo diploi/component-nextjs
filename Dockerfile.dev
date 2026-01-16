@@ -10,6 +10,9 @@ RUN corepack enable
 # Setup PNPM
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
+RUN mkdir -p /pnpm-store \
+ && pnpm config set node-linker hoisted --global \
+ && pnpm config set store-dir /pnpm-store --global
 
 # Install dependencies only when needed
 FROM base AS deps
