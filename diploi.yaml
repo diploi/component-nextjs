@@ -3,16 +3,14 @@ type: component
 name: Next.js
 description: Official Diploi component for Next.js
 
+supportsAdditionalHosts: { serviceName: 'app'}
+
 hosts:
   - name: Next.js
     identifier: app
-    urlFormat: '[label].[default-domain]'
+    port: 3000
 
 images:
   - identifier: app
     prebuildImage: ghcr.io/diploi/component-nextjs:[tag]
 
-logs:
-  - name: Next.js Log
-    type: log
-    labelSelector: app=app
