@@ -12,5 +12,5 @@ hosts:
 
 images:
   - identifier: app
-    prebuildImage: ghcr.io/diploi/component-nextjs:[tag]
+    prebuildImage: public.ecr.aws/p8t2q7f4/diploi/component-nextjs:[tag]
 
