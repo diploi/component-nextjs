@@ -61,21 +61,21 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
-          {{- if eq .Values.stage "development"}}
-          resources:
-            requests:
-              memory: 1500Mi
-            limits:
-              memory: 2000Mi
-          {{- else }}
-          resources:
-            requests:
-              memory: 500Mi
-            limits:
-              memory: 1000Mi
-          {{- end }}
           {{- if eq .Values.stage "development" }}
           workingDir: /app{{ .Values.folder }}
+          {{- with .Values.containerCommands.developmentStart }}
+          command:
+            - /bin/sh
+            - -c
+            - "{{ . }}"
+          {{- end }}
+          {{- else }}
+          {{- with .Values.containerCommands.productionStart }}
+          command:
+            - /bin/sh
+            - -c
+            - "{{ . }}"
+          {{- end }}
           {{- end }}
           env:
             {{- range .Values.env }}
