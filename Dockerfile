@@ -11,6 +11,10 @@ RUN corepack enable
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
+#Install bun
+COPY --from=oven/bun:1.3.11-alpine /usr/local/bin/bun /usr/local/bin/bun
+
+
 # Install dependencies only when needed
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
@@ -21,7 +25,9 @@ WORKDIR ${FOLDER}
 
 # Install dependencies based on the preferred package manager
 RUN \
-  if [ -f yarn.lock ]; then \
+  if [ -f bun.lockb ] || [ -f bun.lock ]; then \
+  bun install --frozen-lockfile || bun install; \
+  elif [ -f yarn.lock ]; then \
   yarn install --frozen-lockfile || yarn install; \
   elif [ -f package-lock.json ]; then \
   npm ci || npm install; \
@@ -47,7 +53,8 @@ COPY --from=deps ${FOLDER}/node_modules ./node_modules
 # ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN \
-  if [ -f yarn.lock ]; then yarn run build; \
+  if [ -f bun.lockb ] || [ -f bun.lock ]; then bun run build; \
+  elif [ -f yarn.lock ]; then yarn run build; \
   elif [ -f package-lock.json ]; then npm run build; \
   elif [ -f pnpm-lock.yaml ]; then pnpm run build; \
   elif [ -f package.json ]; then npm run build; \
