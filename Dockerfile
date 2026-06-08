@@ -30,10 +30,10 @@ RUN \
   bun install --frozen-lockfile || bun install; \
   elif [ -f yarn.lock ]; then \
   yarn install --frozen-lockfile || yarn install; \
-  elif [ -f package-lock.json ]; then \
-  npm ci || npm install; \
   elif [ -f pnpm-lock.yaml ]; then \
   pnpm install --frozen-lockfile || pnpm install; \
+  elif [ -f package-lock.json ]; then \
+  npm ci || npm install; \
   elif [ -f package.json ]; then \
   echo "Lockfile not found. Falling back to npm install (non-deterministic install)."; \
   npm install; \
@@ -56,8 +56,8 @@ COPY --from=deps ${FOLDER}/node_modules ./node_modules
 RUN \
   if [ -f bun.lockb ] || [ -f bun.lock ]; then bun run build; \
   elif [ -f yarn.lock ]; then yarn run build; \
-  elif [ -f package-lock.json ]; then npm run build; \
   elif [ -f pnpm-lock.yaml ]; then pnpm run build; \
+  elif [ -f package-lock.json ]; then npm run build; \
   elif [ -f package.json ]; then npm run build; \
   else echo "No package manifest found. Skipping build step."; \
   fi

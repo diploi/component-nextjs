@@ -42,10 +42,10 @@ spec:
               bun install --frozen-lockfile || bun install
             elif [ -f yarn.lock ]; then
               yarn install --frozen-lockfile || yarn install
-            elif [ -f package-lock.json ]; then
-              npm ci || npm install
             elif [ -f pnpm-lock.yaml ]; then
               pnpm install --frozen-lockfile || pnpm install
+            elif [ -f package-lock.json ]; then
+              npm ci || npm install
             elif [ -f package.json ]; then
               echo "Lockfile not found. Falling back to npm install (non-deterministic install)."
               npm install
